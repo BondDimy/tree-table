@@ -1,0 +1,106 @@
+<div class="tree-item"
+     [ngClass]="{'tree-item-selected': isSelected}"
+     riDroppable
+     riDraggable
+     [dragZone]="treeModel.configuration.dragZone"
+     [dropConfig]="{dropAllowedCssClass: 'drop-enabled', dropZone: treeModel.configuration.dropZone}"
+     [data]="node"
+     (contextmenu)="clickRow($event)"
+     [@enterAnimation]
+>
+
+
+  <div class="tree-cell" #fisrtTreeCell>
+    <div class="edit-row">
+      <i *ngIf="!isExpanded" (click)="expand()" class="fa fa-arrow-right pointer"></i>
+      <i *ngIf="isExpanded" (click)="collapse()" class="fa fa-arrow-down pointer"></i>
+      <span *ngIf="!isEditMode" class="tree-item-name" (click)="onSelect()">
+        <i class="fa fa-bookmark" aria-hidden="true"></i>
+        {{node.name}}
+      </span>
+      <form name="form">
+        <input #inputElement type="text" class="form-control" *ngIf="isEditMode" [formControl]="nameField"
+               name="name" (keydown)="onChange($event)" (blur)="onBlur()"/>
+      </form>
+    </div>
+    <!--<div class="col-sm-4 text-right">-->
+    <!--<span class="btn-group btn-group-sm">-->
+    <!--<button class="btn btn-primary" (click)="onEdit($event)" [disabled]="isEditMode">-->
+    <!--<i class="fa fa-edit"></i>-->
+    <!--</button>-->
+    <!--<button class="btn btn-danger" (click)="onDelete($event)" [disabled]="isEditMode">-->
+    <!--<i class="fa fa-trash"></i>-->
+    <!--</button>-->
+    <!--</span>-->
+    <!--</div>-->
+  </div>
+
+  <div class="tree-cell">
+    <div>
+      <span class="tree-item-name">{{node.name}}</span>
+      <!--<form name="form">-->
+      <!--<input #inputElement type="text" class="form-control" *ngIf="isEditMode" [formControl]="nameField"-->
+      <!--name="name" (keydown)="onChange($event)" (blur)="onBlur()"/>-->
+      <!--</form>-->
+    </div>
+
+
+  </div>
+
+
+  <div class="tree-cell">
+    <div>
+      <span class="tree-item-name">{{node.name}}</span>
+      <!--<form name="form">-->
+      <!--<input #inputElement type="text" class="form-control" *ngIf="isEditMode" [formControl]="nameField"-->
+      <!--name="name" (keydown)="onChange($event)" (blur)="onBlur()"/>-->
+      <!--</form>-->
+    </div>
+
+
+  </div>
+
+
+  <div #tooltip [style.top]="yCoord + 'px'" [style.left]="xCoord + 'px'" id="tooltip">
+    <!--<div class="tooltip__btn-wrapper">-->
+    <!--<button class="button" (click)="onEdit($event)" [disabled]="isEditMode">-->
+
+    <ul>
+      <li (click)="onEdit($event)">
+        <i class="fa fa-edit"></i>
+        <span>
+          Edit
+        </span>
+      </li>
+      <li (click)="onDelete($event)">
+        <i class="fa fa-trash"></i>
+        <span>
+          Delete
+        </span>
+      </li>
+    </ul>
+
+    <!--</button>-->
+    <!--</div>-->
+
+    <!--<div class="tooltip__btn-wrapper">-->
+    <!--<button class="button" (click)="onDelete($event)" [disabled]="isEditMode">-->
+
+    <!--</button>-->
+    <!--</div>-->
+  </div>
+
+
+</div>
+
+
+<div class="tree" *ngIf="isExpanded">
+  <app-nav-item *ngFor="let child of children$ | async" [node]="child" [treeModel]="treeModel"
+                [contextMenu]="contextMenu"></app-nav-item>
+</div>
+
+
+
+
+
+

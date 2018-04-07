@@ -1,0 +1,142 @@
+.tree-item {
+  display: flex;
+  padding: 25px 5px;
+  line-height: 30px;
+  border-radius: 3px;
+  background-color: #fff;
+  cursor: pointer;
+  border-bottom: 1px solid rgba(0,0,0,.12);
+
+
+
+  &.drop-enabled {
+    background-color: #6cd463;
+    color: #fff;
+  }
+
+  &.tree-item-selected {
+    background-color: #039be5;
+    color: #fff;
+    .fa-edit, .fa-trash {
+      color: #000;
+    }
+  }
+
+  td:nth-child(1) {
+    width: 290px;
+    display: inline-flex;
+  }
+
+  td {
+    width: 290px;
+    display: inline-flex;
+    justify-content: space-between;
+    margin-left: 10px;
+  }
+}
+
+.edit-row {
+  display: inline-flex;
+  align-items: center;
+  position: absolute;
+  span {
+    padding-left: 10px;
+  }
+  i{
+    cursor: pointer;
+  }
+}
+
+.button {
+  background-color: #fdfdfd;
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.tree-cell {
+  display: inline-flex;
+  width: 100%;
+  position: relative;
+}
+
+.tree-cell:nth-child(2) {
+  margin-left: -15px;
+}
+
+//.tree-cell:nth-child(3) {
+//  width: calc(100%/1.05);
+//}
+
+.tree {
+  .tree-item {
+    .edit-row:nth-child(1) {
+      left: 20px;
+    }
+  }
+}
+
+.tree .tree {
+  .tree-item {
+    .edit-row:nth-child(1) {
+      left: 40px;
+    }
+  }
+}
+
+.tree .tree .tree {
+  .tree-item {
+    .edit-row:nth-child(1) {
+      left: 60px;
+    }
+  }
+}
+
+.tree .tree .tree .tree {
+  .tree-item {
+    .edit-row:nth-child(1) {
+      left: 80px;
+    }
+  }
+}
+
+.tree .tree .tree .tree .tree {
+  .tree-item {
+    .edit-row:nth-child(1) {
+      left: 100px;
+    }
+  }
+}
+
+.tree .tree .tree .tree .tree .tree{
+  .tree-item {
+    .edit-row:nth-child(1) {
+      left: 120px;
+    }
+  }
+}
+
+
+#tooltip{
+  position: absolute;
+  z-index: 1;
+  background-color: #039be5;
+  width: 150px;
+  color: #fff;
+  ul{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    li{
+      padding: 10px;
+      cursor: pointer;
+      &:hover{
+        background-color: darken(#039be5, 5%);
+      }
+    }
+  }
+  span{
+    padding-left: 10px;
+  }
+}

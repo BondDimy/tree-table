@@ -1,0 +1,26 @@
+<table class="table">
+
+  <div class="table-header">
+    <div class="table-header-item">Company</div>
+    <div class="table-header-item">Contact</div>
+    <div class="table-header-item">Country</div>
+  </div>
+
+
+  <div class="tree-wrapper">
+    <ri-tree [treeModel]="treeModel">
+      <app-nav-item *ngFor="let node of treeModel.getRootNodes() | async" [node]="node" [treeModel]="treeModel"
+                    [contextMenu]="contextMenu"></app-nav-item>
+    </ri-tree>
+  </div>
+
+
+
+
+</table>
+
+
+
+
+
+

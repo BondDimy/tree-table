@@ -1,0 +1,126 @@
+<div>
+
+  <!--<div class="info">-->
+    <!--<p><strong>Note:</strong> ngx-datatable does not provide a context menu feature.-->
+      <!--This demonstrates how you would access the <code>contextmenu</code> event-->
+      <!--to display your own custom context menu.</p>-->
+    <!--<p *ngIf="rawEvent"><strong>Mouse position:</strong> <code>(x: {{rawEvent?.x}}, y: {{rawEvent?.y}})</code></p>-->
+    <!--<p *ngIf="contextmenuRow"><strong>Row:</strong> {{contextmenuRow?.name}}</p>-->
+    <!--<p *ngIf="contextmenuColumn"><strong>Header:</strong>-->
+      <!--name: {{contextmenuColumn?.name}}-->
+      <!--prop: {{contextmenuColumn?.prop}}-->
+    <!--</p>-->
+  <!--</div>-->
+
+  <div #tooltip [style.top]="yCoord + 'px'" [style.left]="xCoord + 'px'" id="tooltip">
+    <ul>
+      <li (click)="clickEvent()">Event 1</li>
+      <li (click)="clickEvent()">Event 2</li>
+      <li (click)="clickEvent()">Event 3</li>
+    </ul>
+  </div>
+
+
+  <ngx-datatable
+    #mydatatable
+    class="material expandable"
+    [headerHeight]="50"
+    [sortType]="'multi'"
+    [limit]="10"
+    [columnMode]="'force'"
+    [footerHeight]="50"
+    [rowHeight]="'auto'"
+    [rows]="rows"
+    [columns]="columns"
+    (tableContextmenu)="onTableContextMenu($event)"
+    [selected]="selected"
+    [selectionType]="'checkbox'"
+    [selectAllRowsOnPage]="false"
+    [displayCheck]="displayCheck"
+    (activate)="onActivate($event)"
+    (select)='onSelect($event)'
+    (page)="onPage($event)"
+  >
+
+
+    <ngx-datatable-row-detail [rowHeight]="'auto'" #myDetailRow (toggle)="onDetailToggle($event)">
+      <ng-template let-row="row" let-expanded="expanded" ngx-datatable-row-detail-template>
+        <!--<app-tree></app-tree>-->
+      </ng-template>
+    </ngx-datatable-row-detail>
+
+
+    <ngx-datatable-column
+      name="Name"
+      [width]="250"
+      [sortable]="true"
+      [canAutoResize]="true"
+      [draggable]="true"
+      [resizeable]="true"
+      [headerCheckboxable]="true"
+      [checkboxable]="true">
+
+      <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
+
+        <a
+          href="javascript:void(0)"
+          [class.datatable-icon-right]="!expanded"
+          [class.datatable-icon-down]="expanded"
+          title="Expand/Collapse Row"
+          (click)="toggleExpandRow(row)">
+        </a>
+
+            <div
+              class="dragable-row"
+              title="Double click to edit"
+              (dblclick)="editing[rowIndex + '-name'] = true"
+              *ngIf="!editing[rowIndex + '-name']"
+              [innerHTML]="row['name']"   (dragover)="allowDrop($event)" draggable="true">
+            </div>
+        <input
+          autofocus
+          (blur)="updateValue($event, 'name', rowIndex)"
+          *ngIf="editing[rowIndex+ '-name']"
+          type="text"
+          [value]="value"
+        />
+      </ng-template>
+
+    </ngx-datatable-column>
+
+    <ngx-datatable-column
+      name="Gender"
+      >
+
+      <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-row="row" let-value="value">
+             <span
+               title="Double click to edit"
+               (dblclick)="editing[rowIndex + '-gender'] = true"
+               *ngIf="!editing[rowIndex + '-gender']">
+              {{value}}
+            </span>
+        <select
+          *ngIf="editing[rowIndex + '-gender']"
+          (blur)="editing[rowIndex + '-gender'] = false"
+          (change)="updateValue($event, 'gender', rowIndex)"
+          [value]="value">
+          <option value="male">Male</option>
+          <option value="female">Female</option>
+        </select>
+      </ng-template>
+
+    </ngx-datatable-column>
+
+    <ngx-datatable-column
+      name="Company"
+    >
+
+      <ng-template ngx-datatable-cell-template let-value="value">
+        {{value}}
+      </ng-template>
+
+    </ngx-datatable-column>
+
+
+  </ngx-datatable>
+</div>

@@ -1,0 +1,27 @@
+@import '~@swimlane/ngx-datatable/release/index.css';
+@import '~@swimlane/ngx-datatable/release/themes/material.css';
+@import '~@swimlane/ngx-datatable/release/assets/icons.css';
+
+#tooltip{
+  position: absolute;
+  z-index: 1;
+  background-color: #039be5;
+  width: 150px;
+  color: #fff;
+  ul{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    li{
+      padding: 10px;
+      cursor: pointer;
+      &:hover{
+        background-color: darken(#039be5, 5%);
+      }
+    }
+  }
+}
+
+.dragable-row{
+  display: inline-flex;
+}
