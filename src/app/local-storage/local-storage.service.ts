@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {IOuterNode, NodeService} from '@rign/angular2-tree';
 import {Observable} from 'rxjs/Observable';
 import {UUID} from 'angular2-uuid';
@@ -57,7 +57,6 @@ export class LocalStorageService extends NodeService {
     const node = this.nodes[index];
 
     // const hasChildren = this.getChildren(nodeId).length > 0;
-
     this.nodes.splice(index, 1);
 
     this.saveNodes();
@@ -73,7 +72,6 @@ export class LocalStorageService extends NodeService {
     // } else {
     //   return Observable.throw('Node is not empty');
     // }
-
   }
 
   private findIndexByNodeId(nodeId: string): number {
@@ -89,7 +87,7 @@ export class LocalStorageService extends NodeService {
 
   protected getAllDataFromLocalStorage(): IOuterNode[] {
     try {
-      const data = localStorage.getItem(this.treeName)
+      const data = localStorage.getItem(this.treeName);
 
       if (data) {
         return JSON.parse(data);

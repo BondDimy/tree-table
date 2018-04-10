@@ -22,10 +22,18 @@ export class TableComponent implements AfterViewInit {
   @ViewChild('tooltip') tooltip;
 
   rows = [
-    {id: 1, name: 'Austin', gender: 'Male', company: 'Swimlane', treeId: 'tree2', parentId: null},
-    {id: 2, name: 'Dany', gender: 'Male', company: 'KFC', treeId: 'tree2', parentId: null},
-    {id: 3, name: 'Molly', gender: 'Female', company: 'Burger King', treeId: 'tree2', parentId: null},
-    {id: 4, name: 'Austin', gender: 'Male', company: 'Swimlane', parentId: 1, treeId: 'tree2'},
+    {id: 1, name: 'Austin', gender: 'male', company: 'Swimlane'},
+    {id: 2, name: 'Dany', gender: 'male', company: 'KFC'},
+    {id: 3, name: 'Molly', gender: 'female', company: 'Burger King'},
+    {id: 4, name: 'Austin', gender: 'male', company: 'Swimlane'},
+    {id: 5, name: 'Austin', gender: 'male', company: 'Swimlane'},
+    {id: 6, name: 'Dany', gender: 'male', company: 'KFC'},
+    {id: 7, name: 'Molly', gender: 'female', company: 'Burger King'},
+    {id: 8, name: 'Austin', gender: 'male', company: 'Swimlane'},
+    {id: 9, name: 'Austin', gender: 'male', company: 'Swimlane'},
+    {id: 10, name: 'Dany', gender: 'male', company: 'KFC'},
+    {id: 11, name: 'Molly', gender: 'female', company: 'Burger King'},
+    {id: 12, name: 'Austin', gender: 'male', company: 'Swimlane'},
   ];
   columns = [
     {prop: 'name'},

@@ -13,6 +13,7 @@ import {Observable} from 'rxjs/Observable';
 import {TreeOneNodeServiceService} from './tree-one-node-service.service';
 import {Store} from '@ngrx/store';
 import {filter, map} from 'rxjs/operators';
+import {contextMenu} from './contextMenu';
 
 @Component({
   selector: 'app-tree',
@@ -23,8 +24,12 @@ import {filter, map} from 'rxjs/operators';
 export class TreeComponent implements OnInit {
 
   public folders: Observable<ITreeData>;
+  public initialized = false;
 
-  public contextMenu: IContextMenu[] = [];
+  public contextMenuX;
+  public contextMenuy;
+
+  public node = null;
 
   public treeConfiguration: IConfiguration = {
     showAddButton: true,
@@ -36,12 +41,22 @@ export class TreeComponent implements OnInit {
   };
 
   public treeModel: TreeModel;
+  // public contextMenu: IContextMenu = {
+  //
+  // };
+
 
   public constructor(private store: Store<ITreeState>,
                      private treeActions: TreeActionsService,
                      private nodeDispatcherService: NodeDispatcherService,
-                     private treeTwoNodeService: TreeOneNodeServiceService) {
+                     private treeTwoNodeService: TreeOneNodeServiceService,
+                     private treeActionsService: TreeActionsService) {
+    contextMenu.state.asObservable().subscribe(data => {
+      this.node = data.node;
+    });
   }
+
+  coords = contextMenu.state.asObservable();
 
   public ngOnInit() {
     const treeId = this.treeConfiguration.treeId;
@@ -58,6 +73,23 @@ export class TreeComponent implements OnInit {
         filter((data: ITreeData) => !!data)
       );
     this.treeModel = new TreeModel(this.folders, this.treeConfiguration);
+    this.initialized = true;
   }
 
+  resetCoords() {
+    this.treeTwoNodeService.setCoords(-1000000, -100000);
+  }
+
+  changeCoords($event: { x: number, y: number, node: any }) {
+    this.node = $event.node;
+    this.treeTwoNodeService.setCoords($event.x, $event.y);
+  }
+
+  public onDelete($event: MouseEvent): void {
+    this.store.dispatch(this.treeActionsService.deleteNode(this.treeModel.treeId, this.node));
+  }
+
+  public onEdit($event: MouseEvent): void {
+    this.store.dispatch(this.treeActionsService.editNodeStart(this.node));
+  }
 }

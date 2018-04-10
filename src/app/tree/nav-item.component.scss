@@ -2,7 +2,6 @@
   display: flex;
   padding: 25px 5px;
   line-height: 30px;
-  border-radius: 3px;
   background-color: #fff;
   cursor: pointer;
   border-bottom: 1px solid rgba(0,0,0,.12);
@@ -114,29 +113,5 @@
     .edit-row:nth-child(1) {
       left: 120px;
     }
-  }
-}
-
-
-#tooltip{
-  position: absolute;
-  z-index: 1;
-  background-color: #039be5;
-  width: 150px;
-  color: #fff;
-  ul{
-    margin: 0;
-    padding: 0;
-    list-style: none;
-    li{
-      padding: 10px;
-      cursor: pointer;
-      &:hover{
-        background-color: darken(#039be5, 5%);
-      }
-    }
-  }
-  span{
-    padding-left: 10px;
   }
 }

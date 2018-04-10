@@ -5,8 +5,9 @@
      [dragZone]="treeModel.configuration.dragZone"
      [dropConfig]="{dropAllowedCssClass: 'drop-enabled', dropZone: treeModel.configuration.dropZone}"
      [data]="node"
-     (contextmenu)="clickRow($event)"
      [@enterAnimation]
+     (contextmenu)="clickRow($event, node)"
+     (click)="clickEvent()"
 >
 
 
@@ -37,66 +38,36 @@
 
   <div class="tree-cell">
     <div>
-      <span class="tree-item-name">{{node.name}}</span>
+      <span class="tree-item-name">Contact</span>
       <!--<form name="form">-->
-      <!--<input #inputElement type="text" class="form-control" *ngIf="isEditMode" [formControl]="nameField"-->
+      <!--<input #inputElement type="text" class="form-control" *ngIf="isEditMode" [formControl]="lastNameField"-->
       <!--name="name" (keydown)="onChange($event)" (blur)="onBlur()"/>-->
       <!--</form>-->
     </div>
 
 
   </div>
-
 
   <div class="tree-cell">
     <div>
-      <span class="tree-item-name">{{node.name}}</span>
+      <span class="tree-item-name">Ukraine</span>
       <!--<form name="form">-->
-      <!--<input #inputElement type="text" class="form-control" *ngIf="isEditMode" [formControl]="nameField"-->
+      <!--<input #inputElement type="text" class="form-control" *ngIf="isEditMode" [formControl]="companyField"-->
       <!--name="name" (keydown)="onChange($event)" (blur)="onBlur()"/>-->
       <!--</form>-->
     </div>
 
 
   </div>
-
-
-  <div #tooltip [style.top]="yCoord + 'px'" [style.left]="xCoord + 'px'" id="tooltip">
-    <!--<div class="tooltip__btn-wrapper">-->
-    <!--<button class="button" (click)="onEdit($event)" [disabled]="isEditMode">-->
-
-    <ul>
-      <li (click)="onEdit($event)">
-        <i class="fa fa-edit"></i>
-        <span>
-          Edit
-        </span>
-      </li>
-      <li (click)="onDelete($event)">
-        <i class="fa fa-trash"></i>
-        <span>
-          Delete
-        </span>
-      </li>
-    </ul>
-
-    <!--</button>-->
-    <!--</div>-->
-
-    <!--<div class="tooltip__btn-wrapper">-->
-    <!--<button class="button" (click)="onDelete($event)" [disabled]="isEditMode">-->
-
-    <!--</button>-->
-    <!--</div>-->
-  </div>
-
-
 </div>
 
 
 <div class="tree" *ngIf="isExpanded">
-  <app-nav-item *ngFor="let child of children$ | async" [node]="child" [treeModel]="treeModel"
-                [contextMenu]="contextMenu"></app-nav-item>
+  <app-nav-item
+    *ngFor="let child of children$ | async"
+    [node]="child" [treeModel]="treeModel"
+  >
+  </app-nav-item>
 </div>
 
 

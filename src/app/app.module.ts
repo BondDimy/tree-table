@@ -24,6 +24,7 @@ import {TableComponent} from './table/table.component';
 @NgModule({
   declarations: [
     AppComponent,
+    TableComponent
   ],
   imports: [
     BrowserModule,
@@ -37,7 +38,8 @@ import {TableComponent} from './table/table.component';
     EffectsModule.forRoot([]),
     StoreModule.forRoot({}),
     StoreDevtoolsModule.instrument(),
-    AngularFontAwesomeModule
+    AngularFontAwesomeModule,
+    NgxDatatableModule
   ],
   providers: [TableService],
   bootstrap: [AppComponent]

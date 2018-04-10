@@ -1,4 +1,4 @@
-<table class="table">
+<table class="table" (click)="resetCoords()">
 
   <div class="table-header">
     <div class="table-header-item">Company</div>
@@ -7,18 +7,39 @@
   </div>
 
 
-  <div class="tree-wrapper">
+  <div *ngIf="initialized" class="tree-wrapper">
     <ri-tree [treeModel]="treeModel">
-      <app-nav-item *ngFor="let node of treeModel.getRootNodes() | async" [node]="node" [treeModel]="treeModel"
-                    [contextMenu]="contextMenu"></app-nav-item>
+      <app-nav-item
+        (coordsChange)="changeCoords($event)"
+        *ngFor="let node of treeModel.getChildren(null) | async" [node]="node" [treeModel]="treeModel"
+      >
+
+
+      </app-nav-item>
     </ri-tree>
   </div>
 
+  <div [style.top]="(coords | async).y + 'px'" [style.left]="(coords | async).x + 'px'" id="tooltip">
+    <!--<div class="tooltip__btn-wrapper">-->
+    <!--<button class="button" (click)="onEdit($event)" [disabled]="isEditMode">-->
 
-
+    <ul>
+      <li (click)="onEdit($event)">
+        <i class="fa fa-edit"></i>
+        <span>
+          Edit
+        </span>
+      </li>
+      <li (click)="onDelete($event)">
+        <i class="fa fa-trash"></i>
+        <span>
+          Delete
+        </span>
+      </li>
+    </ul>
+  </div>
 
 </table>
-
 
 
 
